@@ -5,8 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace AddingBinaryNumbers {
-    class Program {
-        static void Main(string[] args) {
+    class BinaryNumberOverflow : Exception {
+        public BinaryNumberOverflow(string message) : base(message) { 
+            
         }
     }
 }
