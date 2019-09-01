@@ -10,9 +10,12 @@ using System.Threading.Tasks;
 
 namespace AddingBinaryNumbers {
     /// <summary>
-    /// Manipulating binary numbers represented as integer arrays of bits
+    /// Manipulating unsigned integer binary numbers
     /// </summary>
     class BinaryNumber {
+        /// <summary>
+        /// The number of bits in a BinaryNumber object. This is an unsigned integer
+        /// </summary>
         public const int sizeInBits = 32;
         private int[] mBits = new int[sizeInBits];
         public BinaryNumber() {
@@ -28,6 +31,12 @@ namespace AddingBinaryNumbers {
             //set { mBits = value; }    // This is BAD.
             set { value.CopyTo(mBits, 0); /* for (int i = 0; i < sizeInBits; i++) { mBits[i] = value[i]; } */ }
         }
+        /// <summary>
+        /// Add two binary numbers. Throws an exception if the add operation results in overflow.
+        /// </summary>
+        /// <param name="num1">The first number</param>
+        /// <param name="num2">The second number</param>
+        /// <returns>The sum of num1 and num2</returns>
         public static BinaryNumber Add(BinaryNumber num1, BinaryNumber num2) {
             BinaryNumber result = new BinaryNumber();
             int carry = 0;
@@ -59,6 +68,9 @@ namespace AddingBinaryNumbers {
             }
             return result;
         }
+        /// <summary>
+        /// Print the number to the console
+        /// </summary>
         public void Print() {
             for (int i = 0; i < BinaryNumber.sizeInBits; i++) {
                 Console.Write(this.bits[i]);
