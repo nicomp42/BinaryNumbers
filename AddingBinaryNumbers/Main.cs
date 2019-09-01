@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AddingBinaryNumbers {
+namespace BinaryNumbers {
     class TestMain {
         static void Main(string[] args) {
 

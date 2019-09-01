@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AddingBinaryNumbers {
+namespace BinaryNumbers {
     /// <summary>
     /// Manipulating unsigned integer binary numbers
     /// </summary>

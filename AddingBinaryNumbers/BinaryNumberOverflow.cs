@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AddingBinaryNumbers {
+namespace BinaryNumbers {
     class BinaryNumberOverflow : Exception {
         public BinaryNumberOverflow(string message) : base(message) { 
             
