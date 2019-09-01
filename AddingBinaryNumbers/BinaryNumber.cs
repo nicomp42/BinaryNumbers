@@ -15,40 +15,18 @@ namespace AddingBinaryNumbers {
     class BinaryNumber {
         public const int sizeInBits = 32;
         private int[] mBits = new int[sizeInBits];
-        static void Main(string[] args) {
-            BinaryNumber n1 = new BinaryNumber(new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 });
-            BinaryNumber n2 = new BinaryNumber(new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 });
-            BinaryNumber answer;
-            answer = BinaryNumber.Add(n1, n2);
-            answer.Print();
-            Console.WriteLine();
-
-            n1 = new BinaryNumber(new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1 });
-            n2 = new BinaryNumber(new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1 });
-            answer = BinaryNumber.Add(n1, n2);
-            answer.Print();
-            Console.WriteLine();
-
-            // Should overflow and throw an exception
-            n1 = new BinaryNumber(new int[] { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1 });
-            n2 = new BinaryNumber(new int[] { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1 });
-            try {
-                answer = BinaryNumber.Add(n1, n2);
-            } catch (BinaryNumberOverflow ex) {
-                Console.WriteLine(ex.Message);
-            }
-            answer.Print();
-            Console.WriteLine();
-        }
         public BinaryNumber() {
-            bits = (new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 });
+            bits = new int[sizeInBits];
+            for (int i = 0; i < sizeInBits; i++) {bits[i] = 0;}
         }
         public BinaryNumber(int [] theBits) {
-            for (int i=0; i < sizeInBits; i++) { bits[i] = theBits[i]; }
+            for (int i=0; i < sizeInBits; i++) { mBits[i] = theBits[i]; }
         }
         public int[] bits {
-            get { return mBits; }
-            set { mBits = value; }  // This is BAD.
+            //get { return mBits; }     // This is BAD
+            get { return (int[]) mBits.Clone(); }
+            //set { mBits = value; }    // This is BAD.
+            set { value.CopyTo(mBits, 0); /* for (int i = 0; i < sizeInBits; i++) { mBits[i] = value[i]; } */ }
         }
         public static BinaryNumber Add(BinaryNumber num1, BinaryNumber num2) {
             BinaryNumber result = new BinaryNumber();
@@ -58,20 +36,20 @@ namespace AddingBinaryNumbers {
                 bitTotal = carry + num1.bits[i] + num2.bits[i];
                 switch (bitTotal) {
                 case 0:
-                    result.bits[i] = 0;
+                    result.mBits[i] = 0;
                     carry = 0;
                 break;
                 case 1:
-                    result.bits[i] = 1;
+                    result.mBits[i] = 1;
                     carry = 0;
                 break;
 
                 case 2:
-                    result.bits[i] = 0;
+                    result.mBits[i] = 0;
                     carry = 1;             
                 break;
                 case 3:
-                    result.bits[i] = 1;
+                    result.mBits[i] = 1;
                     carry = 1;
                 break;
                 }
@@ -82,7 +60,7 @@ namespace AddingBinaryNumbers {
             return result;
         }
         public void Print() {
-            for (int i = 0; i < sizeInBits; i++) {
+            for (int i = 0; i < BinaryNumber.sizeInBits; i++) {
                 Console.Write(this.bits[i]);
             }
         }

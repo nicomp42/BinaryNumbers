@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="BinaryNumber.cs" />
     <Compile Include="BinaryNumberOverflow.cs" />
+    <Compile Include="Main.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
